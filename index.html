@@ -1168,7 +1168,7 @@ function spawnFeather(x, y, vx, vy, size = 1) {
 function spawnHaystack() {
   const canvasHeight = canvas.clientHeight;
   const floorHeight = 118;
-  const gap = 170 - Math.min(state.score * 1.5, 18);
+  const gap = 170 - Math.min(state.score * 1.8, 24);
   const topMargin = 110;
   const bottomMargin = floorHeight + 90;
   const gapY = topMargin + Math.random() * (canvasHeight - topMargin - bottomMargin - gap);
