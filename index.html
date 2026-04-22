@@ -670,7 +670,8 @@ const panelIntro = document.getElementById("panelIntro");
 const panelSubcopy = document.getElementById("panelSubcopy");
 const stageButtons = [...document.querySelectorAll(".stage-option")];
 
-const DPR = Math.min(window.devicePixelRatio || 1, 2);
+const IS_MOBILE_DEVICE = window.matchMedia("(pointer: coarse)").matches || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const DPR = Math.min(window.devicePixelRatio || 1, IS_MOBILE_DEVICE ? 1.25 : 2);
 const BEST_KEY = "clucky-skies-best";
 const AudioContextClass = window.AudioContext || window.webkitAudioContext;
 const TOTAL_STAGES = 6;
