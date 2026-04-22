@@ -1129,7 +1129,7 @@ function resetGame(stageId = state.selectedStage) {
   syncRainAudio();
 }
 
-function flap(boost = -380) {
+function flap(boost = -352) {
   if (!state.running) {
     resetGame();
   }
@@ -1424,10 +1424,10 @@ function update(dt) {
       chicken.vx = 0;
     }
 
-    chicken.vy += 920 * dt;
+    chicken.vy += 890 * dt;
     chicken.vy = Math.min(chicken.vy, 520);
     chicken.y += chicken.vy * dt;
-    chicken.tilt = Math.max(-0.8, Math.min(1.05, chicken.vy / 420 + chicken.vx / 520));
+    chicken.tilt = Math.max(-0.72, Math.min(1.02, chicken.vy / 445 + chicken.vx / 520));
 
     if (state.pipeTimer >= 2.08) {
       state.pipeTimer = 0;
