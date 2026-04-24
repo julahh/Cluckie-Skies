@@ -333,7 +333,7 @@ canvas {
 .badge {
   min-width: 90px;
   padding: 10px 14px;
-  border-radius: 18px;
+  border-radius: 15px;
   background: rgba(255, 250, 232, 0.88);
   box-shadow: 0 12px 24px rgba(98, 133, 160, 0.14);
   text-align: center;
@@ -341,7 +341,7 @@ canvas {
 
 .label {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.64rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: rgba(61, 42, 29, 0.7);
@@ -361,7 +361,7 @@ canvas {
   width: auto;
   min-width: 92px;
   padding: 11px 16px;
-  border-radius: 18px;
+  border-radius: 15px;
   font-size: 0.95rem;
   box-shadow: 0 12px 20px rgba(84, 121, 52, 0.22);
   background:
@@ -386,64 +386,58 @@ canvas {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: linear-gradient(180deg, rgba(90, 179, 247, 0.2), rgba(255, 255, 255, 0.22));
+  background: linear-gradient(180deg, rgba(28, 73, 103, 0.2), rgba(255, 251, 238, 0.32));
   opacity: 0;
   pointer-events: none;
   transition: opacity 220ms ease;
 }
-
 .overlay.visible {
   opacity: 1;
   pointer-events: auto;
 }
-
 .panel {
   width: min(100%, 340px);
-  padding: 24px 22px 20px;
+  padding: 18px 18px 20px;
   border-radius: 28px;
-  background: var(--panel);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 24px 48px rgba(50, 94, 122, 0.18);
+  background: rgba(255, 250, 232, 0.92);
+  border: 2px solid rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 24px 44px rgba(50, 94, 122, 0.2);
   text-align: center;
 }
-
 .eyebrow {
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.72rem;
-  color: #816444;
+  color: #7f5f3d;
 }
-
 h1 {
   margin: 0;
   font-family: var(--display-font);
-  font-size: 3rem;
+  font-size: 2.8rem;
   line-height: 0.95;
+  color: #3b2b1d;
 }
-
 .intro,
 .subcopy {
   margin: 14px 0 0;
-  font-size: 1rem;
+  font-size: 0.92rem;
   line-height: 1.45;
 }
-
 .controls {
+  margin-top: 14px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 16px;
 }
-
 .controls span {
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(255, 190, 86, 0.25);
+  background: rgba(255, 190, 86, 0.18);
   font-weight: 800;
 }
-
 .stage-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -456,18 +450,18 @@ h1 {
   -webkit-tap-highlight-color: transparent;
   margin-top: 0;
   width: 100%;
-  min-height: 62px;
-  padding: 12px 10px;
-  border-radius: 18px;
+  min-height: 60px;
+  padding: 11px 10px;
+  border-radius: 20px;
   font-family: var(--display-font);
   font-size: 0.98rem;
   line-height: 1.1;
   color: #4b2f1f;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 251, 240, 0.74)),
-    linear-gradient(180deg, #fff0cf 0%, #f5d79e 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 251, 240, 0.82)),
+    linear-gradient(180deg, #fff5de 0%, #efd3a3 100%);
   box-shadow:
-    0 10px 18px rgba(131, 95, 42, 0.16),
+    0 10px 18px rgba(131, 95, 42, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
@@ -475,10 +469,59 @@ h1 {
   color: #fffaf1;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.04)),
-    linear-gradient(180deg, #ffac68 0%, #ec7b35 100%);
+    linear-gradient(180deg, #ffb36f 0%, #e67834 100%);
   box-shadow:
     0 14px 24px rgba(192, 111, 44, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.stage-option[data-stage="1"] {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.52), rgba(255,255,255,0.16)),
+    linear-gradient(180deg, #9edcff 0%, #f7d46e 100%);
+}
+
+.stage-option[data-stage="2"] {
+  color: #f8fbff;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.03)),
+    linear-gradient(180deg, #61738f 0%, #2c3547 100%);
+}
+
+.stage-option[data-stage="3"] {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.08)),
+    linear-gradient(180deg, #f4b36a 0%, #a54f29 100%);
+  color: #fff8ef;
+}
+
+.stage-option[data-stage="4"] {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.52), rgba(255,255,255,0.14)),
+    linear-gradient(180deg, #c9ecff 0%, #7bb5e6 100%);
+}
+
+.stage-option[data-stage="5"] {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.4), rgba(255,255,255,0.12)),
+    linear-gradient(180deg, #9de08b 0%, #43a055 100%);
+  color: #fffdf5;
+}
+
+.stage-option[data-stage="6"] {
+  color: #eaffe7;
+  background:
+    linear-gradient(180deg, rgba(173,255,208,0.18), rgba(255,255,255,0.02)),
+    linear-gradient(180deg, #182239 0%, #070c16 100%);
+}
+
+.stage-option[data-stage="1"].is-selected,
+.stage-option[data-stage="2"].is-selected,
+.stage-option[data-stage="3"].is-selected,
+.stage-option[data-stage="4"].is-selected,
+.stage-option[data-stage="5"].is-selected,
+.stage-option[data-stage="6"].is-selected {
+  transform: translateY(-1px);
 }
 
 button {
@@ -554,7 +597,7 @@ button:active {
   .move-button {
     width: 58px;
     height: 58px;
-    border-radius: 18px;
+    border-radius: 15px;
     font-size: 1.6rem;
   }
 
@@ -670,8 +713,7 @@ const panelIntro = document.getElementById("panelIntro");
 const panelSubcopy = document.getElementById("panelSubcopy");
 const stageButtons = [...document.querySelectorAll(".stage-option")];
 
-const IS_MOBILE_DEVICE = window.matchMedia("(pointer: coarse)").matches || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-const DPR = Math.min(window.devicePixelRatio || 1, IS_MOBILE_DEVICE ? 1.25 : 2);
+const DPR = Math.min(window.devicePixelRatio || 1, 2);
 const BEST_KEY = "clucky-skies-best";
 const AudioContextClass = window.AudioContext || window.webkitAudioContext;
 const TOTAL_STAGES = 6;
@@ -680,7 +722,7 @@ const STAGES = {
   1: {
     name: "Blue Sky Farm",
     eyebrow: "Sunny Barnyard Run",
-    intro: "Classic blue-sky flight with egg point drops and bright farm haystacks.",
+    intro: "A sunny starting stage with egg point drops, farm haystacks, and the first stop in Clucky's changing seasonal skies.",
     subcopy: "Keep Clucky clear of hay bales and the ground while scooping up eggs for bonus points.",
     action: "Play Blue Sky Farm",
   },
