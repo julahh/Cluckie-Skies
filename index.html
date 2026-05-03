@@ -714,6 +714,9 @@ const panelSubcopy = document.getElementById("panelSubcopy");
 const stageButtons = [...document.querySelectorAll(".stage-option")];
 
 const DPR = Math.min(window.devicePixelRatio || 1, 2);
+const MOBILE_PERF = window.matchMedia("(pointer: coarse)").matches || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+const MAX_DECOR_DROPS = MOBILE_PERF ? 2 : 3;
+const MAX_FEATHERS = MOBILE_PERF ? 18 : 30;
 const BEST_KEY = "clucky-skies-best";
 const AudioContextClass = window.AudioContext || window.webkitAudioContext;
 const TOTAL_STAGES = 6;
@@ -1197,6 +1200,10 @@ function flap(boost = -352) {
 }
 
 function spawnFeather(x, y, vx, vy, size = 1) {
+  if (state.feathers.length >= MAX_FEATHERS) {
+    return;
+  }
+
   state.feathers.push({
     x,
     y,
@@ -1489,25 +1496,25 @@ function update(dt) {
       spawnRaindrop();
     }
 
-    if (state.stage === 3 && state.leafTimer >= state.nextLeafIn && state.leaves.length < 3) {
+    if (state.stage === 3 && state.leafTimer >= state.nextLeafIn && state.leaves.length < MAX_DECOR_DROPS) {
       state.leafTimer = 0;
       state.nextLeafIn = 1.5 + Math.random() * 1.1;
       spawnLeaf();
     }
 
-    if (state.stage === 4 && state.snowTimer >= state.nextSnowIn && state.snowballs.length < 3) {
+    if (state.stage === 4 && state.snowTimer >= state.nextSnowIn && state.snowballs.length < MAX_DECOR_DROPS) {
       state.snowTimer = 0;
       state.nextSnowIn = 1.5 + Math.random() * 1;
       spawnSnowball();
     }
 
-    if (state.stage === 5 && state.cloverTimer >= state.nextCloverIn && state.clovers.length < 3) {
+    if (state.stage === 5 && state.cloverTimer >= state.nextCloverIn && state.clovers.length < MAX_DECOR_DROPS) {
       state.cloverTimer = 0;
       state.nextCloverIn = 1.4 + Math.random() * 1;
       spawnClover();
     }
 
-    if (state.stage === 6 && state.meteorTimer >= state.nextMeteorIn && state.meteors.length < 3) {
+    if (state.stage === 6 && state.meteorTimer >= state.nextMeteorIn && state.meteors.length < MAX_DECOR_DROPS) {
       state.meteorTimer = 0;
       state.nextMeteorIn = 1.35 + Math.random() * 0.9;
       spawnMeteor();
@@ -1908,7 +1915,7 @@ function drawBackground() {
 
     ctx.strokeStyle = "rgba(214, 231, 243, 0.12)";
     ctx.lineWidth = 2;
-    for (let i = 0; i < 42; i += 1) {
+    for (let i = 0; i < (MOBILE_PERF ? 26 : 42); i += 1) {
       const x = (i * 18 + state.time * 120) % (w + 60) - 30;
       const y = (i * 23) % horizon;
       ctx.beginPath();
@@ -2090,7 +2097,7 @@ function drawBackground() {
     ctx.fill();
 
     ctx.fillStyle = "rgba(255,255,255,0.85)";
-    for (let i = 0; i < 26; i += 1) {
+    for (let i = 0; i < (MOBILE_PERF ? 14 : 26); i += 1) {
       const sx = (i * 73 + Math.sin(i * 4.1) * 28) % w;
       const sy = 36 + (i * 47) % (h * 0.45);
       ctx.beginPath();
@@ -2494,12 +2501,13 @@ function drawHaystack(x, y, width, height, upsideDown = false) {
       ctx.quadraticCurveTo(x + width * 0.74, strandY - sag * 0.45, x + width - 10, strandY + sag * 0.8);
       ctx.stroke();
 
-      for (let bulb = 0; bulb < 8; bulb += 1) {
-        const px = x + 12 + bulb * ((width - 24) / 7);
+      const bulbCount = MOBILE_PERF ? 5 : 8;
+      for (let bulb = 0; bulb < bulbCount; bulb += 1) {
+        const px = x + 12 + bulb * ((width - 24) / (bulbCount - 1));
         const py = strandY + Math.sin(bulb * 1.2 + state.time * 0.8 + strand * 0.7) * (6 + strand) + (bulb % 2) * 4;
         const color = lightColors[(bulb + strand) % lightColors.length];
         const blink = Math.sin(state.time * 7.2 + bulb * 1.7 + strand * 1.3) > 0 ? 1 : 0.22;
-        const glow = blink > 0.5 ? 16 : 3;
+        const glow = MOBILE_PERF ? (blink > 0.5 ? 8 : 1.5) : (blink > 0.5 ? 16 : 3);
 
         ctx.fillStyle = color;
         ctx.globalAlpha = blink;
@@ -2885,7 +2893,7 @@ function drawClover(clover) {
   ctx.rotate(clover.spin);
 
   ctx.shadowColor = "rgba(132, 83, 17, 0.2)";
-  ctx.shadowBlur = clover.radius * 0.35;
+  ctx.shadowBlur = MOBILE_PERF ? clover.radius * 0.18 : clover.radius * 0.35;
 
   const coinGradient = ctx.createRadialGradient(-clover.radius * 0.24, -clover.radius * 0.28, 2, 0, 0, clover.radius * 1.02);
   coinGradient.addColorStop(0, "#f7e7a3");
